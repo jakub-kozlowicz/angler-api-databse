@@ -1,0 +1,36 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="POST" id="" action="">
+{{ form.hidden_tag() }}
+<fieldset class="form-group">
+  <legend class="border-bottom mb-4">Delete credit from database</legend>
+    <div class="form-group">
+      {{ form.credit_id.label(class="form-control-label") }}
+      {% if form.credit_id.errors %}
+      {{ form.credit_id(class="form-control is-invalid", placeholder="Enter credit ID") }}
+      <div class="invalid-feedback">
+        {% for error in form.credit_id.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{ form.credit_id(class="form-control", placeholder="Enter credit ID") }}
+      {% endif %}
+    </div>
+</fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+</br>
+</br>
+
+{% if data %}
+    <p>{{ data }}</p>
+{% else %}
+    <p>No response</p>
+{% endif %}
+
+{% endblock %}
+
