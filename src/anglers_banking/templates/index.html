@@ -1,0 +1,66 @@
+{% extends "base.html" %}
+{% block content %}
+
+<div class="accordion" id="accordionExample">
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingOne">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="false" aria-controls="collapseOne">
+        Manipulate credit in database
+      </button>
+    </h2>
+    <div id="collapseOne" class="accordion-collapse collapse" aria-labelledby="headingOne" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+          <div class="container">
+          <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('add_credit')}}" role="button">Add credit to database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('delete_credit')}}" role="button">Delete credit from database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('get_credit')}}" role="button">Get credit information from database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('update_credit_value')}}" role="button">Update credit value in database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('update_credit_currency')}}" role="button">Update credit currency in database</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="accordion-item">
+    <h2 class="accordion-header" id="headingTwo">
+      <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+        Manipulate users in database
+      </button>
+    </h2>
+    <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#accordionExample">
+      <div class="accordion-body">
+          <div class="container">
+          <div class="row">
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('add_user')}}" role="button">Add user to database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('delete_user')}}" role="button">Delete user from database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('get_user')}}" role="button">Get user information from database</a>
+            </div>
+            <div class="col">
+                <a class="btn btn-primary" href="{{ url_for('update_user_name')}}" role="button">Update user name in database</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+{% endblock %}
+

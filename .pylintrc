@@ -1,0 +1,10 @@
+[MASTER]
+extension-pkg-whitelist=pydantic,pygame
+load-plugins=pylint_pydantic
+ignore-paths=.*_model.
+
+[FORMAT CHECKER]
+max-line-length = 100
+
+[SIMILARITIES]
+min-similarity-lines = 10

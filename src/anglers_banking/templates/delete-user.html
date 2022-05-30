@@ -1,0 +1,37 @@
+{% extends "base.html" %}
+{% block content %}
+
+<form method="POST" id="" action="">
+{{ form.hidden_tag() }}
+<fieldset class="form-group">
+  <legend class="border-bottom mb-4">Delete user from database</legend>
+    <div class="form-group">
+      {{ form.user_id.label(class="form-control-label") }}
+      {% if form.user_id.errors %}
+      {{ form.user_id(class="form-control is-invalid", placeholder="Enter user ID") }}
+      <div class="invalid-feedback">
+        {% for error in form.user_id.errors %}
+            <span>{{ error }}</span>
+        {% endfor %}
+      </div>
+      {% else %}
+      {{ form.user_id(class="form-control", placeholder="Enter user ID") }}
+      {% endif %}
+    </div>
+</fieldset>
+    <div class="form-group">
+        {{ form.submit(class="btn btn-primary") }}
+    </div>
+</form>
+</br>
+</br>
+
+{% if data %}
+    <p>{{ data }}</p>
+{% else %}
+    <p>No response</p>
+{% endif %}
+
+{% endblock %}
+
+
