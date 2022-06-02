@@ -41,10 +41,8 @@
 </br>
 
 {% if data %}
-    <p>{{ data }}</p>
-{% else %}
-    <p>No response</p>
+    <h2> Response from API</h2>
+    <pre class="border border-secondary rounded">{{ data }}</pre>
 {% endif %}
 
 {% endblock %}
-

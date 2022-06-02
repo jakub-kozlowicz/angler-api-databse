@@ -1,7 +1,9 @@
 """Flask website entrypoint"""
 
+import json
+
 import requests
-from flask import Flask, flash, redirect, render_template, request, url_for
+from flask import Flask, render_template, request, url_for
 
 from anglers_banking.forms.credit import (AddCreditForm, DeleteCreditForm,
                                           GetCreditForm,
@@ -31,11 +33,11 @@ def add_credit():
                 f"credits?"
                 f"user_id={form.user_id.data}"
                 f"&value={form.value.data}"
-                f"&currency={form.currnecy.data}"
+                f"&currency={form.currency.data}"
                 f"&bank_name={form.bank_name.data}"
             )
         )
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "add-credit.html", title="Add credit to database", form=form, data=data
@@ -49,7 +51,7 @@ def delete_credit():
     form = DeleteCreditForm()
     if form.validate_on_submit():
         response = requests.delete(url + f"credits?credit_id={form.credit_id.data}")
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "delete-credit.html", title="Delete credit from database", form=form, data=data
@@ -62,9 +64,21 @@ def get_credit():
     url = "http://localhost:8000/"
     form = GetCreditForm()
     if form.validate_on_submit():
-        # TODO: Check which parameters was passed and construct proper request
-        response = requests.get(url + "credits?")
-        data = response.json()
+        credit_id = form.credit_id.data
+        user_id = form.user_id.data
+        currency = form.currency.data
+        endpoint = "credits?"
+        if not any([credit_id, user_id, currency]):
+            endpoint += ""
+        elif all([credit_id, currency]) and user_id is None:
+            endpoint = f"credit_id={credit_id}&currency={currency}"
+        elif credit_id is not None and not any([user_id, currency]):
+            endpoint += f"credit_id={credit_id}"
+        elif user_id is not None and not any([credit_id, currency]):
+            endpoint += f"user_id={user_id}"
+
+        response = requests.get(url + endpoint)
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "get-credit.html",
@@ -83,12 +97,12 @@ def update_credit_value():
         response = requests.put(
             url
             + (
-                f"/credits?"
+                f"credits?"
                 f"credit_id={form.credit_id.data}"
                 f"&value={form.value.data}"
             )
         )
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-credit-value.html",
@@ -107,12 +121,12 @@ def update_credit_currency():
         response = requests.patch(
             url
             + (
-                f"/credits?"
+                f"credits?"
                 f"credit_id={form.credit_id.data}"
                 f"&currency={form.currency.data}"
             )
         )
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-credit-currency.html",
@@ -136,7 +150,7 @@ def add_user():
                 f"&full_name={form.full_name.data}"
             )
         )
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "add-user.html", title="Add user to database", form=form, data=data
@@ -149,8 +163,8 @@ def delete_user():
     url = "http://localhost:8000/"
     form = DeleteUserForm()
     if form.validate_on_submit():
-        response = requests.delete(url + f"credits?user_id={form.user_id.data}")
-        data = response.json()
+        response = requests.delete(url + f"users?user_id={form.user_id.data}")
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "delete-user.html", title="Delete user from database", form=form, data=data
@@ -163,9 +177,20 @@ def get_user():
     url = "http://localhost:8000/"
     form = GetUserForm()
     if form.validate_on_submit():
-        # TODO: Check which parameters was passed and construct proper request
-        response = requests.get(url + "users?")
-        data = response.json()
+        user_id = form.user_id.data
+        full_name = form.full_name.data
+        endpoint = "users?"
+        if not any([full_name, user_id]):
+            endpoint += ""
+        elif all([full_name, user_id]):
+            endpoint += f"user_id={user_id}&full_name={full_name}"
+        elif user_id is not None:
+            endpoint += f"user_id={user_id}"
+        elif full_name is not None:
+            endpoint += f"full_name={full_name}"
+
+        response = requests.get(url + endpoint)
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "get-user.html",
@@ -181,7 +206,7 @@ def update_user_name():
     url = "http://localhost:8000/"
     form = UpdateUserNameForm()
     if form.validate_on_submit():
-        response = requests.post(
+        response = requests.put(
             url
             + (
                 f"users?"
@@ -189,7 +214,7 @@ def update_user_name():
                 f"&full_name={form.full_name.data}"
             )
         )
-        data = response.json()
+        data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-user-name.html",
