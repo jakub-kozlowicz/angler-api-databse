@@ -1,6 +1,21 @@
 {% extends "base.html" %}
 {% block content %}
 
+{% if url == "" %}
+
+</br>
+</br>
+<center><h2>Choose your API</h2></center>
+</br>
+<form method="POST" action="">
+    <div class="d-grid gap-2 col-6 mx-auto">
+      <button class="btn btn-primary" type="submit" value="Python" name="Python">Python</button>
+      <button class="btn btn-warning" type="submit" value="C#" name="C#">C#</button>
+    </div>
+</form>
+
+{% else %}
+
 <div class="accordion" id="accordionExample">
   <div class="accordion-item">
     <h2 class="accordion-header" id="headingOne">
@@ -60,7 +75,6 @@
     </div>
   </div>
 </div>
-
+{% endif %}
 
 {% endblock %}
-

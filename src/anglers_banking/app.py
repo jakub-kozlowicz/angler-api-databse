@@ -15,16 +15,28 @@ from anglers_banking.forms.user import (AddUserForm, DeleteUserForm,
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
 
+URL = ""
+
 
 @app.route("/", methods=["GET", "POST"])
 def index() -> str:
-    return render_template("index.html", title="Anglers Credits Database")
+    global URL
+    if request.method == "POST":
+        if request.form.get("Python") == "Python":
+            URL = "http://localhost:8000/"
+        elif request.form.get("C#") == "C#":
+            URL = "http://localhost:9000/"
+        elif request.form.get("Reset") == "Reset":
+            URL = ""
+
+    return render_template("index.html", title="Anglers Credits Database", url=URL)
 
 
 @app.route("/add-credit", methods=["GET", "POST"])
 def add_credit():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = AddCreditForm()
     if form.validate_on_submit():
         response = requests.post(
@@ -47,7 +59,8 @@ def add_credit():
 @app.route("/delete-credit", methods=["GET", "POST"])
 def delete_credit():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = DeleteCreditForm()
     if form.validate_on_submit():
         response = requests.delete(url + f"credits?credit_id={form.credit_id.data}")
@@ -61,7 +74,8 @@ def delete_credit():
 @app.route("/get-credit", methods=["GET", "POST"])
 def get_credit():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = GetCreditForm()
     if form.validate_on_submit():
         credit_id = form.credit_id.data
@@ -91,7 +105,8 @@ def get_credit():
 @app.route("/update-credit-value", methods=["GET", "POST"])
 def update_credit_value():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = UpdateCreditValueForm()
     if form.validate_on_submit():
         response = requests.put(
@@ -115,7 +130,8 @@ def update_credit_value():
 @app.route("/update-credit-currency", methods=["GET", "POST"])
 def update_credit_currency():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = UpdateCreditCurrencyForm()
     if form.validate_on_submit():
         response = requests.patch(
@@ -139,7 +155,8 @@ def update_credit_currency():
 @app.route("/add-user", methods=["GET", "POST"])
 def add_user():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = AddUserForm()
     if form.validate_on_submit():
         response = requests.post(
@@ -160,7 +177,8 @@ def add_user():
 @app.route("/delete-user", methods=["GET", "POST"])
 def delete_user():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = DeleteUserForm()
     if form.validate_on_submit():
         response = requests.delete(url + f"users?user_id={form.user_id.data}")
@@ -174,7 +192,8 @@ def delete_user():
 @app.route("/get-user", methods=["GET", "POST"])
 def get_user():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = GetUserForm()
     if form.validate_on_submit():
         user_id = form.user_id.data
@@ -203,7 +222,8 @@ def get_user():
 @app.route("/update-user-name", methods=["GET", "POST"])
 def update_user_name():
     data = None
-    url = "http://localhost:8000/"
+    global URL
+    url = URL
     form = UpdateUserNameForm()
     if form.validate_on_submit():
         response = requests.put(
