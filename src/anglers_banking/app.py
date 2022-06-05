@@ -58,6 +58,12 @@ def add_credit():
         )
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "add-credit.html", title="Add credit to database", form=form, data=data
@@ -74,6 +80,12 @@ def delete_credit():
         response = requests.delete(url + f"credits?credit_id={form.credit_id.data}")
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "delete-credit.html", title="Delete credit from database", form=form, data=data
@@ -103,6 +115,12 @@ def get_credit():
         response = requests.get(url + endpoint)
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "get-credit.html",
@@ -129,6 +147,12 @@ def update_credit_value():
         )
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "update-credit-value.html",
@@ -155,6 +179,12 @@ def update_credit_currency():
         )
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "update-credit-currency.html",
@@ -181,6 +211,12 @@ def add_user():
         )
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "add-user.html", title="Add user to database", form=form, data=data
@@ -197,6 +233,12 @@ def delete_user():
         response = requests.delete(url + f"users?user_id={form.user_id.data}")
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "delete-user.html", title="Delete user from database", form=form, data=data
@@ -225,6 +267,12 @@ def get_user():
         response = requests.get(url + endpoint)
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "get-user.html",
@@ -251,6 +299,12 @@ def update_user_name():
         )
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
+        else:
+            data = json.dumps(
+                {"message": "Unknown error occurred in API request"},
+                indent=4,
+                sort_keys=True,
+            )
 
     return render_template(
         "update-user-name.html",
