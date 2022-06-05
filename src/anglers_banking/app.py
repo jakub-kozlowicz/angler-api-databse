@@ -56,7 +56,8 @@ def add_credit():
                 f"&bank_name={form.bank_name.data}"
             )
         )
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "add-credit.html", title="Add credit to database", form=form, data=data
@@ -71,7 +72,8 @@ def delete_credit():
     form = DeleteCreditForm()
     if form.validate_on_submit():
         response = requests.delete(url + f"credits?credit_id={form.credit_id.data}")
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "delete-credit.html", title="Delete credit from database", form=form, data=data
@@ -99,7 +101,8 @@ def get_credit():
             endpoint += f"user_id={user_id}"
 
         response = requests.get(url + endpoint)
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "get-credit.html",
@@ -124,7 +127,8 @@ def update_credit_value():
                 f"&value={form.value.data}"
             )
         )
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-credit-value.html",
@@ -149,7 +153,8 @@ def update_credit_currency():
                 f"&currency={form.currency.data}"
             )
         )
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-credit-currency.html",
@@ -174,7 +179,8 @@ def add_user():
                 f"&full_name={form.full_name.data}"
             )
         )
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "add-user.html", title="Add user to database", form=form, data=data
@@ -189,7 +195,8 @@ def delete_user():
     form = DeleteUserForm()
     if form.validate_on_submit():
         response = requests.delete(url + f"users?user_id={form.user_id.data}")
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "delete-user.html", title="Delete user from database", form=form, data=data
@@ -216,7 +223,8 @@ def get_user():
             endpoint += f"full_name={full_name}"
 
         response = requests.get(url + endpoint)
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "get-user.html",
@@ -241,7 +249,8 @@ def update_user_name():
                 f"&full_name={form.full_name.data}"
             )
         )
-        data = json.dumps(response.json(), indent=4, sort_keys=True)
+        if response.status_code == 200:
+            data = json.dumps(response.json(), indent=4, sort_keys=True)
 
     return render_template(
         "update-user-name.html",
