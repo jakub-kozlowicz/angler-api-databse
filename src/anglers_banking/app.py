@@ -92,7 +92,7 @@ def get_credit():
         if not any([credit_id, user_id, currency]):
             endpoint += ""
         elif all([credit_id, currency]) and user_id is None:
-            endpoint = f"credit_id={credit_id}&currency={currency}"
+            endpoint += f"credit_id={credit_id}&currency={currency}"
         elif credit_id is not None and not any([user_id, currency]):
             endpoint += f"credit_id={credit_id}"
         elif user_id is not None and not any([credit_id, currency]):
