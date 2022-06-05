@@ -17,7 +17,6 @@ class GetUserForm(FlaskForm):
 class AddUserForm(FlaskForm):
     """Adding user form validation"""
 
-    user_id = IntegerField("Client ID", validators=[Optional(), NumberRange(min=0)])
     full_name = StringField(
         "User full name", validators=[DataRequired(), Length(max=255)]
     )

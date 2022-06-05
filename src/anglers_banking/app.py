@@ -201,14 +201,7 @@ def add_user():
     url = URL
     form = AddUserForm()
     if form.validate_on_submit():
-        response = requests.post(
-            url
-            + (
-                f"users?"
-                f"user_id={form.user_id.data}"
-                f"&full_name={form.full_name.data}"
-            )
-        )
+        response = requests.post(url + (f"users?full_name={form.full_name.data}"))
         if response.status_code == 200:
             data = json.dumps(response.json(), indent=4, sort_keys=True)
         else:
