@@ -5,12 +5,19 @@ import json
 import requests
 from flask import Flask, render_template, request, url_for
 
-from anglers_banking.forms.credit import (AddCreditForm, DeleteCreditForm,
-                                          GetCreditForm,
-                                          UpdateCreditCurrencyForm,
-                                          UpdateCreditValueForm)
-from anglers_banking.forms.user import (AddUserForm, DeleteUserForm,
-                                        GetUserForm, UpdateUserNameForm)
+from anglers_banking.forms.credit import (
+    AddCreditForm,
+    DeleteCreditForm,
+    GetCreditForm,
+    UpdateCreditCurrencyForm,
+    UpdateCreditValueForm,
+)
+from anglers_banking.forms.user import (
+    AddUserForm,
+    DeleteUserForm,
+    GetUserForm,
+    UpdateUserNameForm,
+)
 
 app = Flask(__name__)
 app.config.from_pyfile("config.py")
@@ -23,9 +30,9 @@ def index() -> str:
     global URL
     if request.method == "POST":
         if request.form.get("Python") == "Python":
-            URL = "http://localhost:8000/"
+            URL = "https://api.python.anglers-banking.online/"
         elif request.form.get("C#") == "C#":
-            URL = "http://localhost:9000/"
+            URL = "http://api.csharp.anglers-banking.online/api/"
         elif request.form.get("Reset") == "Reset":
             URL = ""
 
